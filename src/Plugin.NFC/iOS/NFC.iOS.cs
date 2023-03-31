@@ -137,12 +137,17 @@ namespace Plugin.NFC
 		/// <param name="tagInfo">see <see cref="ITagInfo"/></param>
 		public void ClearMessage(ITagInfo tagInfo) => WriteOrClearMessage(_tag, tagInfo, true);
 
-		/// <summary>
-		/// Event raised when NFC tags are detected
-		/// </summary>
-		/// <param name="session">iOS <see cref="NFCTagReaderSession"/></param>
-		/// <param name="tags">Array of iOS <see cref="INFCTag"/></param>
-		public override void DidDetectTags(NFCTagReaderSession session, INFCTag[] tags)
+        /// <summary>
+        /// Format non NDEF Tags - The tag must be NDEF Formatable
+        /// </summary>
+        public void FormatNonNDEFTag() => throw new NotSupportedException(Configuration.Messages.NFCWritingNotSupported);
+
+        /// <summary>
+        /// Event raised when NFC tags are detected
+        /// </summary>
+        /// <param name="session">iOS <see cref="NFCTagReaderSession"/></param>
+        /// <param name="tags">Array of iOS <see cref="INFCTag"/></param>
+        public override void DidDetectTags(NFCTagReaderSession session, INFCTag[] tags)
 		{
 			_customInvalidation = false;
 			_tag = tags.First();
@@ -570,12 +575,14 @@ namespace Plugin.NFC
 		/// <param name="tagInfo">see <see cref="ITagInfo"/></param>
 		public void ClearMessage(ITagInfo tagInfo) => WriteOrClearMessage(_tag, tagInfo, true);
 
-		/// <summary>
-		/// Event raised when NDEF messages are detected
-		/// </summary>
-		/// <param name="session">iOS <see cref="NFCNdefReaderSession"/></param>
-		/// <param name="messages">Array of iOS <see cref="NFCNdefMessage"/></param>
-		public override void DidDetect(NFCNdefReaderSession session, NFCNdefMessage[] messages)
+        public void FormatNonNDEFTag() => throw new NotSupportedException(Configuration.Messages.NFCWritingNotSupported);
+
+        /// <summary>
+        /// Event raised when NDEF messages are detected
+        /// </summary>
+        /// <param name="session">iOS <see cref="NFCNdefReaderSession"/></param>
+        /// <param name="messages">Array of iOS <see cref="NFCNdefMessage"/></param>
+        public override void DidDetect(NFCNdefReaderSession session, NFCNdefMessage[] messages)
 		{
 			OnTagConnected?.Invoke(null, EventArgs.Empty);
 

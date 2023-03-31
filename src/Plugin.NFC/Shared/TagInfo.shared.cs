@@ -1,4 +1,6 @@
-﻿namespace Plugin.NFC
+﻿using System;
+
+namespace Plugin.NFC
 {
 	/// <summary>
 	/// Default implementation of <see cref="ITagInfo"/>
@@ -7,10 +9,25 @@
 	{
 		public byte[] Identifier { get; }
 
-		/// <summary>
-		/// Tag Serial Number
-		/// </summary>
-		public string SerialNumber { get;  }
+        public string TagId
+        {
+            get
+            {
+                if (Identifier != null && Identifier.Length > 0)
+                {
+                    var tagIdString = NFCUtils.ByteArrayToHexString(Identifier);
+                    var reverseHex = NFCUtils.LittleEndian(tagIdString);
+                    return Convert.ToInt64(reverseHex, 16).ToString();
+                }
+                else
+                    return string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Tag Serial Number
+        /// </summary>
+        public string SerialNumber { get;  }
 
 		/// <summary>
 		/// Writable tag

@@ -10,7 +10,7 @@ namespace NFCSample
 	public partial class MainPage : ContentPage, INotifyPropertyChanged
 	{
 		public const string ALERT_TITLE = "NFC";
-		public const string MIME_TYPE = "application/com.companyname.nfcsample";
+		public const string MIME_TYPE = "application/com.alpsware.nfcsample";
 
 		NFCNdefTypeFormat _type;
 		bool _makeReadOnly = false;
