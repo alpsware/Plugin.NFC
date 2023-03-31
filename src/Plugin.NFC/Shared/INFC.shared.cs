@@ -76,11 +76,6 @@ namespace Plugin.NFC
 		void ClearMessage(ITagInfo tagInfo);
 
         /// <summary>
-        /// Format non NDEF Tags - The tag must be NDEF Formatable
-        /// </summary>
-        void FormatNonNDEFTag();
-
-        /// <summary>
         /// Event raised when tag is connected
         /// </summary>
         event EventHandler OnTagConnected;

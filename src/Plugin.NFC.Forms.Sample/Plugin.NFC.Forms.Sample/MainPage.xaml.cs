@@ -67,7 +67,12 @@ namespace NFCSample
 					await ShowAlert("NFC is disabled");
 
 				if (Device.RuntimePlatform == Device.iOS)
+				{
 					_isDeviceiOS = true;
+					//use legacy mode if reading Ndef from mifare classic 1k on ios
+					CrossNFC.Legacy = true;
+
+                }
 
 				//// Custom NFC configuration (ex. UI messages in French)
 				//CrossNFC.Current.SetConfiguration(new NfcConfiguration
@@ -270,7 +275,9 @@ namespace NFCSample
 				tagInfo.Records = new[] { record };
 
 				if (format)
-					CrossNFC.Current.ClearMessage(tagInfo);
+				{
+                    CrossNFC.Current.ClearMessage(tagInfo);
+                }
 				else
 				{
 					CrossNFC.Current.PublishMessage(tagInfo, _makeReadOnly);

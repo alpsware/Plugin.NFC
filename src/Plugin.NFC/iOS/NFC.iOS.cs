@@ -138,11 +138,6 @@ namespace Plugin.NFC
 		public void ClearMessage(ITagInfo tagInfo) => WriteOrClearMessage(_tag, tagInfo, true);
 
         /// <summary>
-        /// Format non NDEF Tags - The tag must be NDEF Formatable
-        /// </summary>
-        public void FormatNonNDEFTag() => throw new NotSupportedException(Configuration.Messages.NFCWritingNotSupported);
-
-        /// <summary>
         /// Event raised when NFC tags are detected
         /// </summary>
         /// <param name="session">iOS <see cref="NFCTagReaderSession"/></param>
@@ -574,8 +569,6 @@ namespace Plugin.NFC
 		/// </summary>
 		/// <param name="tagInfo">see <see cref="ITagInfo"/></param>
 		public void ClearMessage(ITagInfo tagInfo) => WriteOrClearMessage(_tag, tagInfo, true);
-
-        public void FormatNonNDEFTag() => throw new NotSupportedException(Configuration.Messages.NFCWritingNotSupported);
 
         /// <summary>
         /// Event raised when NDEF messages are detected
